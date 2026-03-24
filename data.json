@@ -1,0 +1,31 @@
+{
+  "config": {
+    "cliente": "Espaco Viv",
+    "dateStart": "2026-03-11",
+    "dateEnd": "2026-04-24",
+    "valor": 3500,
+    "metaPosts": 20,
+    "adsBudget": 0
+  },
+  "tasks": [
+    {
+      "name": "Criar identidade visual para Instagram",
+      "deadline": "",
+      "responsible": "SmartMedia",
+      "status": "pendente"
+    }
+  ],
+  "posts": [],
+  "campaigns": [],
+  "ads": {
+    "budgetTotal": 0,
+    "budgetUsed": 0
+  },
+  "performance": {},
+  "dash_metrics": {
+    "adsUsed": 0,
+    "adsTotal": 0
+  },
+  "report": {},
+  "report_history": []
+}
