@@ -23,7 +23,8 @@ const DEFAULT_DATA = {
   performance: {},
   dash_metrics: { adsUsed: 0, adsTotal: 0 },
   report: {},
-  report_history: []
+  report_history: [],
+  social_posts: []
 };
 
 function loadData() {

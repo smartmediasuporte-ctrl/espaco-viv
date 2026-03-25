@@ -210,12 +210,119 @@ tr:hover td{background:rgba(255,255,255,0.01)}
 .history-info .hdate{font-weight:600}
 .history-info .hperiod{color:var(--text-muted);font-size:11px}
 
+/* ===== SOCIAL MEDIA SECTION ===== */
+:root{--gold:#B8966E;--purple:#7C3AED;--pink:#DB2777;--sm-blue:#2563EB;--sm-orange:#D97706;--sm-gray:#6B7280}
+.sm-subtabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:0}
+.sm-subtab{padding:10px 18px;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;border:none;background:none;font-family:inherit;border-bottom:2px solid transparent;transition:var(--transition)}
+.sm-subtab:hover{color:var(--text)}
+.sm-subtab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.sm-panel{display:none;animation:fadeIn 0.3s ease}
+.sm-panel.active{display:block}
+.sm-metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.sm-metric{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;text-align:center}
+.sm-metric .smv{font-size:22px;font-weight:700}
+.sm-metric .sml{font-size:10px;color:var(--text-muted);text-transform:uppercase;margin-top:2px}
+.sm-filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.sm-filter-btn{padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-family:inherit;transition:var(--transition)}
+.sm-filter-btn:hover,.sm-filter-btn.active{background:rgba(184,150,110,0.15);border-color:var(--gold);color:var(--gold)}
+.sm-filter-select{padding:6px 12px;border-radius:20px;font-size:11px;background:var(--bg);border:1px solid var(--border);color:var(--text-muted);font-family:inherit;cursor:pointer}
+.sm-search{padding:6px 12px;border-radius:20px;font-size:11px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:inherit;min-width:160px}
+.sm-search:focus{outline:none;border-color:var(--gold)}
+.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.post-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:var(--transition)}
+.post-card:hover{border-color:rgba(184,150,110,0.3);transform:translateY(-2px)}
+.post-card-header{padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+.post-card-thumb{height:140px;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:32px;position:relative;overflow:hidden}
+.post-card-thumb img{width:100%;height:100%;object-fit:cover}
+.post-card-body{padding:14px}
+.post-card-body .pc-title{font-weight:700;font-size:14px;margin-bottom:4px}
+.post-card-body .pc-meta{font-size:11px;color:var(--text-dim);margin-bottom:8px}
+.post-card-body .pc-copy{font-size:11px;color:var(--text-muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post-card-actions{padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:6px}
+.post-card-actions button{flex:1}
+.badge-format{padding:3px 8px;border-radius:20px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
+.badge-reel{background:rgba(124,58,237,0.15);color:var(--purple)}
+.badge-feed{background:rgba(37,99,235,0.15);color:var(--sm-blue)}
+.badge-carrossel{background:rgba(217,119,6,0.15);color:var(--sm-orange)}
+.badge-stories{background:rgba(219,39,119,0.15);color:var(--pink)}
+.badge-institucional{background:rgba(107,114,128,0.15);color:var(--sm-gray)}
+.badge-status-rascunho{background:rgba(107,114,128,0.15);color:var(--sm-gray)}
+.badge-status-pendente{background:rgba(234,179,8,0.15);color:var(--yellow)}
+.badge-status-aprovado{background:rgba(16,185,129,0.15);color:var(--green-light)}
+.badge-status-publicado{background:rgba(37,99,235,0.15);color:var(--sm-blue)}
+.badge-status-arquivado{background:rgba(239,68,68,0.15);color:var(--red)}
+/* SM Modal large */
+.modal.modal-lg{max-width:800px;width:95%}
+.modal-sections{display:flex;flex-direction:column;gap:20px}
+.modal-section-title{font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.char-counter{font-size:10px;color:var(--text-dim);text-align:right;margin-top:2px}
+.copy-btn{padding:4px 10px;font-size:10px;background:rgba(184,150,110,0.15);border:1px solid rgba(184,150,110,0.3);border-radius:4px;color:var(--gold);cursor:pointer;font-family:inherit;transition:var(--transition)}
+.copy-btn:hover{background:rgba(184,150,110,0.25)}
+/* Editorial Calendar */
+.ecal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+.ecal-views{display:flex;gap:4px}
+.ecal-views button{padding:6px 14px;border-radius:var(--radius);font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-family:inherit;transition:var(--transition)}
+.ecal-views button.active{background:rgba(184,150,110,0.15);border-color:var(--gold);color:var(--gold)}
+.ecal-legend{display:flex;gap:12px;font-size:11px;color:var(--text-muted);flex-wrap:wrap}
+.ecal-legend span{display:flex;align-items:center;gap:4px}
+.ecal-legend .ldot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ecal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.ecal-day-head{background:var(--card);padding:8px;text-align:center;font-size:11px;font-weight:600;color:var(--text-dim)}
+.ecal-day{background:var(--bg);min-height:90px;padding:5px;cursor:pointer;transition:var(--transition)}
+.ecal-day:hover{background:rgba(184,150,110,0.02)}
+.ecal-day.today{border:1px solid var(--gold)}
+.ecal-day.other{opacity:0.25}
+.ecal-day .eday-num{font-size:11px;font-weight:600;color:var(--text-dim);margin-bottom:3px}
+.ecal-chip{font-size:8px;padding:2px 6px;border-radius:3px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;position:relative}
+.ecal-chip.reel{background:rgba(124,58,237,0.25);color:#a78bfa}
+.ecal-chip.feed{background:rgba(37,99,235,0.25);color:#60a5fa}
+.ecal-chip.carrossel{background:rgba(217,119,6,0.25);color:#fbbf24}
+.ecal-chip.stories{background:rgba(219,39,119,0.25);color:#f472b6}
+.ecal-chip .status-dot{position:absolute;top:2px;right:2px;width:5px;height:5px;border-radius:50%}
+/* Week view */
+.ecal-weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ecal-week-col{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.ecal-week-head{padding:10px 12px;font-size:12px;font-weight:700;border-bottom:1px solid var(--border);color:var(--gold)}
+.ecal-week-body{padding:8px;display:flex;flex-direction:column;gap:6px;min-height:200px}
+.ecal-week-card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;cursor:pointer;transition:var(--transition)}
+.ecal-week-card:hover{border-color:rgba(184,150,110,0.3)}
+.ecal-week-card .ewc-title{font-size:11px;font-weight:600;margin-bottom:3px}
+.ecal-week-card .ewc-meta{font-size:9px;color:var(--text-dim)}
+/* Generator */
+.gen-layout{display:grid;grid-template-columns:2fr 3fr;gap:20px;min-height:60vh}
+.gen-left,.gen-right{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.gen-left h4,.gen-right h4{font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;margin-bottom:16px}
+.gen-output-tabs{display:flex;gap:4px;margin-bottom:16px}
+.gen-output-tab{padding:6px 12px;font-size:11px;font-weight:600;border:1px solid var(--border);border-radius:var(--radius);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit;transition:var(--transition)}
+.gen-output-tab.active{background:rgba(184,150,110,0.15);border-color:var(--gold);color:var(--gold)}
+.gen-panel{display:none}
+.gen-panel.active{display:block}
+.gen-field{margin-bottom:14px}
+.gen-field label{display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:4px}
+.gen-field textarea,.gen-field input,.gen-field select{width:100%;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:inherit;font-size:12px}
+.gen-field textarea:focus,.gen-field input:focus,.gen-field select:focus{outline:none;border-color:var(--gold)}
+.gen-field textarea{resize:vertical}
+.gen-field-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.gen-field-header label{margin-bottom:0}
+.cli-block{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;font-family:monospace;font-size:11px;color:var(--green-light);white-space:pre-wrap;word-break:break-all;position:relative;margin-top:8px}
+.template-dropdown{position:relative}
+.template-list{position:absolute;bottom:100%;left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);max-height:250px;overflow-y:auto;z-index:10;display:none}
+.template-list.open{display:block}
+.template-list-item{padding:8px 12px;font-size:11px;cursor:pointer;border-bottom:1px solid rgba(39,39,42,0.3);transition:var(--transition)}
+.template-list-item:hover{background:rgba(184,150,110,0.08)}
+.template-list-item:last-child{border-bottom:none}
+.template-list-item .tl-title{font-weight:600}
+.template-list-item .tl-pilar{font-size:9px;color:var(--gold)}
 @media(max-width:768px){
   .sidebar{display:none}
   .cards-grid{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
   .config-grid{grid-template-columns:1fr}
   .cal-day{min-height:60px}
+  .sm-metrics{grid-template-columns:repeat(3,1fr)}
+  .posts-grid{grid-template-columns:1fr}
+  .gen-layout{grid-template-columns:1fr}
+  .ecal-weeks{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -259,6 +366,10 @@ tr:hover td{background:rgba(255,255,255,0.01)}
     <button class="nav-item" data-tab="calendar" onclick="switchTab('calendar')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       Calendário
+    </button>
+    <button class="nav-item" data-tab="socialmedia" onclick="switchTab('socialmedia')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><polygon points="13,13 22,13 22,22 13,22"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+      Social Media
     </button>
     <button class="nav-item" data-tab="metaads" onclick="switchTab('metaads')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
@@ -329,6 +440,130 @@ tr:hover td{background:rgba(255,255,255,0.01)}
         <button class="btn btn-primary btn-sm" onclick="openPostModal()">+ Novo Post</button>
       </div>
       <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+    <!-- ===== TAB: SOCIAL MEDIA ===== -->
+    <div class="tab-panel" id="tab-socialmedia">
+      <div class="sm-subtabs" id="smSubtabs">
+        <button class="sm-subtab active" data-sm="posts" onclick="switchSmTab('posts')">Posts</button>
+        <button class="sm-subtab" data-sm="editorial" onclick="switchSmTab('editorial')">Calendário Editorial</button>
+        <button class="sm-subtab" data-sm="generator" onclick="switchSmTab('generator')" id="smGenTab">Gerador de Conteúdo</button>
+      </div>
+
+      <!-- SM Sub-tab: Posts -->
+      <div class="sm-panel active" id="sm-posts">
+        <div class="sm-metrics" id="smMetrics"></div>
+        <div class="sm-filters" id="smFilters">
+          <button class="sm-filter-btn active" onclick="filterSmPosts('todos')">Todos</button>
+          <button class="sm-filter-btn" onclick="filterSmPosts('Rascunho')">Rascunho</button>
+          <button class="sm-filter-btn" onclick="filterSmPosts('Aprovação Pendente')">Pendente</button>
+          <button class="sm-filter-btn" onclick="filterSmPosts('Aprovado')">Aprovado</button>
+          <button class="sm-filter-btn" onclick="filterSmPosts('Publicado')">Publicado</button>
+          <select class="sm-filter-select" id="smFilterFormat" onchange="renderSmPosts()">
+            <option value="">Formato</option>
+            <option value="Feed 4:5">Feed</option>
+            <option value="Reel 9:16">Reel</option>
+            <option value="Carrossel 1:1">Carrossel</option>
+            <option value="Stories 9:16">Stories</option>
+          </select>
+          <select class="sm-filter-select" id="smFilterWeek" onchange="renderSmPosts()">
+            <option value="">Semana</option>
+            <option value="Semana 1">Semana 1</option>
+            <option value="Semana 2">Semana 2</option>
+            <option value="Semana 3">Semana 3</option>
+            <option value="Semana 4">Semana 4</option>
+          </select>
+          <input class="sm-search" id="smSearch" placeholder="Buscar post..." oninput="renderSmPosts()">
+          <button class="btn btn-primary btn-sm" id="smNewPostBtn" onclick="openSmPostModal()" style="margin-left:auto">+ Novo Post</button>
+        </div>
+        <div class="posts-grid" id="smPostsGrid"></div>
+      </div>
+
+      <!-- SM Sub-tab: Editorial Calendar -->
+      <div class="sm-panel" id="sm-editorial">
+        <div class="ecal-header">
+          <div class="cal-nav">
+            <button class="btn-icon" onclick="ecalNav(-1)">&#8249;</button>
+            <div class="cal-month" id="ecalMonth">-</div>
+            <button class="btn-icon" onclick="ecalNav(1)">&#8250;</button>
+          </div>
+          <div class="ecal-views">
+            <button class="active" id="ecalMonthBtn" onclick="setEcalView('month')">Mês</button>
+            <button id="ecalWeekBtn" onclick="setEcalView('week')">Semana</button>
+          </div>
+          <div class="ecal-legend">
+            <span><div class="ldot" style="background:var(--purple)"></div>Reel</span>
+            <span><div class="ldot" style="background:var(--sm-blue)"></div>Feed</span>
+            <span><div class="ldot" style="background:var(--sm-orange)"></div>Carrossel</span>
+            <span><div class="ldot" style="background:var(--pink)"></div>Stories</span>
+          </div>
+          <button class="btn btn-primary btn-sm" id="ecalNewBtn" onclick="openSmPostModal()">+ Agendar Post</button>
+        </div>
+        <div id="ecalContent"></div>
+      </div>
+
+      <!-- SM Sub-tab: Generator -->
+      <div class="sm-panel" id="sm-generator">
+        <div class="gen-layout">
+          <div class="gen-left">
+            <h4>Configurar Geração</h4>
+            <div class="gen-field"><label>Pilar de conteúdo</label><select id="genPilar"><option value="Institucional">Institucional</option><option value="Educativo">Educativo</option><option value="Conversão">Conversão</option><option value="Humanização">Humanização</option><option value="Sazonal">Sazonal</option><option value="ASMR/Sensorial">ASMR/Sensorial</option></select></div>
+            <div class="gen-field"><label>Formato</label><select id="genFormato" onchange="updateGenAspect()"><option value="Feed 4:5">Feed 4:5</option><option value="Reel 9:16">Reel 9:16</option><option value="Stories 9:16">Stories 9:16</option><option value="Carrossel 1:1">Carrossel 1:1</option></select></div>
+            <div class="gen-field"><label>Objetivo do post</label><select id="genObjetivo"><option value="Alcance">Alcance</option><option value="Engajamento">Engajamento</option><option value="Conversão">Conversão</option><option value="Salvamentos">Salvamentos</option><option value="Depoimento">Depoimento</option></select></div>
+            <div class="gen-field"><label>Tema / Contexto</label><textarea id="genTema" rows="3" placeholder="Ex: Páscoa, voucher presente, público feminino"></textarea></div>
+            <div class="gen-field"><label>Tom</label><select id="genTom"><option value="Acolhedor">Acolhedor</option><option value="Direto">Direto</option><option value="Emocional">Emocional</option><option value="Educativo">Educativo</option><option value="Urgência suave">Urgência suave</option></select></div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
+              <button class="btn btn-primary" onclick="showToast('Use os templates do banco para gerar conteúdo','info')">&#10024; Gerar Copy + Prompt</button>
+              <div class="template-dropdown">
+                <button class="btn btn-ghost" onclick="toggleTemplateList()" style="width:100%">Usar template do banco</button>
+                <div class="template-list" id="templateList"></div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:20px;border-top:1px solid var(--border);padding-top:16px">
+              <button class="btn btn-ghost" onclick="saveGenAsDraft()">Salvar como Rascunho</button>
+              <button class="btn btn-primary" onclick="addGenToCalendar()">Adicionar ao Calendário</button>
+            </div>
+          </div>
+          <div class="gen-right">
+            <div class="gen-output-tabs">
+              <button class="gen-output-tab active" onclick="switchGenOutput('copy')">Copy</button>
+              <button class="gen-output-tab" onclick="switchGenOutput('prompt')">Prompt de Imagem</button>
+            </div>
+            <div class="gen-panel active" id="genPanelCopy">
+              <div class="gen-field">
+                <div class="gen-field-header"><label>Legenda Instagram</label><button class="copy-btn" onclick="copyField('genCopy')">Copiar</button></div>
+                <textarea id="genCopy" rows="8" placeholder="Copy da legenda aparecerá aqui..."></textarea>
+                <div class="char-counter"><span id="genCopyCount">0</span> caracteres</div>
+              </div>
+              <div class="gen-field">
+                <div class="gen-field-header"><label>Copy Stories</label><button class="copy-btn" onclick="copyField('genStories')">Copiar</button></div>
+                <textarea id="genStories" rows="4" placeholder="Copy para stories..."></textarea>
+              </div>
+              <div class="gen-field">
+                <div class="gen-field-header"><label>Hashtags</label><button class="copy-btn" onclick="copyField('genHashtags')">Copiar</button></div>
+                <textarea id="genHashtags" rows="3" placeholder="Hashtags..."></textarea>
+              </div>
+            </div>
+            <div class="gen-panel" id="genPanelPrompt">
+              <div class="gen-field">
+                <div style="display:flex;gap:12px;margin-bottom:12px">
+                  <div><label style="font-size:11px;color:var(--text-muted)">Aspect Ratio</label><div id="genAspect" style="font-weight:700;font-size:13px;margin-top:2px">4:5</div></div>
+                  <div><label style="font-size:11px;color:var(--text-muted)">Resolution</label><div style="font-weight:700;font-size:13px;margin-top:2px">2K</div></div>
+                </div>
+              </div>
+              <div class="gen-field">
+                <div class="gen-field-header"><label>Prompt Nano Banana 2</label><button class="copy-btn" onclick="copyField('genPrompt')">Copiar Prompt</button></div>
+                <textarea id="genPrompt" rows="8" placeholder="Prompt de imagem aparecerá aqui..."></textarea>
+              </div>
+              <div class="gen-field">
+                <div class="gen-field-header"><label>Comando CLI</label><button class="copy-btn" onclick="copyCliCmd()">Copiar Comando</button></div>
+                <div class="cli-block" id="genCliBlock">infsh app run google/gemini-3-1-flash-image-preview \
+  --input '{"prompt": "...", "aspect_ratio": "4:5", "resolution": "2K"}'</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="tab-panel" id="tab-metaads">
@@ -446,7 +681,7 @@ tr:hover td{background:rgba(255,255,255,0.01)}
 </div>
 
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" onclick="event.stopPropagation()">
+  <div class="modal" id="modalBox" onclick="event.stopPropagation()">
     <div class="modal-header"><h3 id="modalTitle">-</h3><button class="btn-icon" onclick="closeModal()">&#10005;</button></div>
     <div class="modal-body" id="modalBody"></div>
     <div class="modal-footer" id="modalFooter"></div>
@@ -525,6 +760,479 @@ function showToast(msg,type){type=type||'success';var c=document.getElementById(
 function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML}
 function formatDate(d){if(!d)return'-';var p=d.split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+
+// ===================================================================
+// SOCIAL MEDIA MODULE
+// ===================================================================
+var smFilter='todos';
+var ecalYear,ecalMonth,ecalView='month';
+var editingSmPostId=null;
+
+var INITIAL_SM_POSTS=[
+{id:"post-01",titulo:"Institucional de Lançamento",formato:"Feed 4:5",semana:"Semana 1",dataPublicacao:"2026-03-26",pilar:"Institucional",status:"Rascunho",copyLegenda:"Existe uma versão de você que respira fundo.\nQue não verifica o celular.\nQue lembra, por um momento, como é estar inteira.\n\nO Espaço Viv foi construído para ela.\n\nDuas unidades em Brasília. Rituais de massagem, drenagem e relaxamento de alto padrão.\n\nAgende sua sessão pelo link na bio.",copyStories:"Slide 1: \"Você não precisa de mais um item na lista.\"\nSlide 2: \"Precisa de uma hora só sua.\"\nSlide 3: [CTA] \"Agendar agora → link na bio\"",hashtags:"#EspaçoViv #SPABrasília #MassagemBrasília #BemEstar #Autocuidado #WellnessBrasília #SPAPremium #Relaxamento #DrenagemlinfáticaBSB #MassagemRelaxante #CuidadoFeminino #BrasíliaDF #VivaViv #RituaisDeCorpo #MassagemTerapêutica",promptImagem:"Luxurious Brazilian urban spa treatment room, warm candlelight illumination, creamy linen textures on massage table, single white orchid in minimalist ceramic vase, soft terracotta wall tones, shallow depth of field, editorial photography style, golden hour warm light, no people, intimate and serene atmosphere, Aman spa aesthetic, champagne and espresso color tones, photorealistic, 4:5 aspect ratio, 2K resolution",imagemUrl:null,notasInternas:"",responsavel:"Equipe SM"},
+{id:"post-02",titulo:"Carrossel — 5 Razões Para Parar Hoje",formato:"Carrossel 1:1",semana:"Semana 1",dataPublicacao:"2026-03-27",pilar:"Educativo",status:"Rascunho",copyLegenda:"Guarda esse post.\n\nNão pra lembrar depois — pra usar como argumento quando a voz na sua cabeça disser que não é hora.\n\nÉ sempre hora de cuidar de você.\n\n→ Link na bio para agendamento.",copyStories:"\"5 razões pelas quais você merece parar hoje\" — vê no feed.",hashtags:"#Autocuidado #BemEstar #SaúdeFeminina #MassagemTerapêutica #EspaçoViv #SPABrasília #CuidadoComOCorpo #SaúdeIntegrativa #VidaSaudável #WellnessBrasília #RelaxamentoTotal #Mindfulness #MassagemRelaxante #BrasíliaDF #AutocuidadoÉSaúde",promptImagem:"Minimal flat lay on warm stone surface: amber massage oil in elegant glass bottle, dried pampas grass, smooth river stones, lit soy candle in champagne gold ceramic, white linen cloth with subtle texture, warm natural side lighting, no text, luxury wellness brand aesthetic, soft shadows, espresso background, photorealistic, 1:1 square format",imagemUrl:null,notasInternas:"Carrossel 6 slides — texto nos slides via Canva após gerar imagem de fundo",responsavel:"Equipe SM"},
+{id:"reel-01",titulo:"Reel ASMR do Ritual",formato:"Reel 9:16",semana:"Semana 1",dataPublicacao:"2026-03-29",pilar:"ASMR/Sensorial",status:"Rascunho",copyLegenda:"Não tem como explicar.\nTem que sentir.\n\n📍 Espaço Viv — Brasília\n→ Agende: link na bio",copyStories:"",hashtags:"#EspaçoViv #ASMR #MassagemASMR #SPABrasília #Relaxamento #BemEstar #WellnessBrasília #Autocuidado",promptImagem:"Cinematic still frame: woman lying face-down on luxury spa massage table, professional therapist hands visible working on upper back, warm amber candlelight, blurred foreground of white orchid petals, 9:16 vertical format, rich warm color grading, champagne and espresso tones, no visible face, sensorial and calming mood, editorial quality, photorealistic",imagemUrl:null,notasInternas:"Thumbnail do reel — gravar vídeo real ou usar imagem gerada como placeholder",responsavel:"Equipe SM"},
+{id:"post-03",titulo:"Educativo — Relaxante vs Terapêutica",formato:"Feed 4:5",semana:"Semana 2",dataPublicacao:"2026-04-01",pilar:"Educativo",status:"Rascunho",copyLegenda:"Massagem relaxante e massagem terapêutica não são a mesma coisa.\n\nE saber a diferença muda o que você pede — e o que você sente.\n\n— Relaxante: trabalha o sistema nervoso. O objetivo é desligar. Pressão leve a média, movimentos lentos, óleo aromático. Você sai dormindo.\n\n— Terapêutica: trabalha músculo e fáscia. O objetivo é liberar. Pressão profunda, pontos específicos, técnica direcionada.\n\nNo Espaço Viv, você escolhe o que o seu corpo precisa agora.\n\n→ Fale com a gente pelo WhatsApp antes de agendar.",copyStories:"Sabia que massagem relaxante e terapêutica têm objetivos diferentes? Vê no feed.",hashtags:"#MassagemTerapêutica #MassagemRelaxante #TiposDeMassagem #EspaçoViv #SPABrasília #BemEstar #SaúdeDoCorpo #WellnessBrasília #Autocuidado #CorpoSaudável #MassagemProfissional #BrasíliaDF",promptImagem:"Two premium spa oils side by side on smooth limestone surface, warm amber and terracotta colored bottles, soft diffused natural light, botanical elements scattered, close-up product photography, warm espresso tones in background, luxury wellness brand, clean composition with negative space, photorealistic, 4:5 ratio",imagemUrl:null,notasInternas:"",responsavel:"Equipe SM"},
+{id:"post-04",titulo:"Prova Social — Depoimento",formato:"Feed 4:5",semana:"Semana 2",dataPublicacao:"2026-04-03",pilar:"Humanização",status:"Rascunho",copyLegenda:"\"Eu cheguei travada. Saí inteira.\"\n\nEssa foi a mensagem que recebemos na semana passada.\n\nNão precisamos de mais palavras do que essa.\n\nO Espaço Viv existe para isso — para devolver você a você mesma.\n\n→ Link na bio para agendar.",copyStories:"\"Eu cheguei travada. Saí inteira.\" — Que sensação você quer ter ao sair daqui?",hashtags:"#EspaçoViv #Depoimento #SPABrasília #MassagemBrasília #BemEstar #Autocuidado #WellnessBrasília #ResultadoReal",promptImagem:"Atmospheric moody spa corner: single white candle casting warm glow on dark espresso wooden table, blurred tropical leaf in background, wisps of steam from ceramic cup of herbal tea, extreme negative space on left side for text placement, cinematic and intimate, Rosewood Asaya spa aesthetic, warm champagne light, photorealistic, 4:5 Instagram post format",imagemUrl:null,notasInternas:"Verificar com Raissa se tem depoimento real para usar ou se ficamos com texto genérico",responsavel:"Equipe SM"},
+{id:"post-05",titulo:"Campanha Páscoa — Voucher Gift",formato:"Feed 4:5",semana:"Semana 3",dataPublicacao:"2026-04-07",pilar:"Sazonal",status:"Rascunho",copyLegenda:"Páscoa é sobre renovação.\n\nNão de chocolate — de você.\n\nEste ano, presenteie quem você ama (ou a si mesma) com algo que dure mais do que um dia: um ritual de cuidado real.\n\nVouchers-presente do Espaço Viv disponíveis para todas as sessões.\n\n→ Fale com a gente pelo WhatsApp para adquirir o seu.",copyStories:"Slide 1: \"O presente que ela realmente quer nessa Páscoa\"\nSlide 2: \"Não é chocolate. É uma hora inteiramente dela.\"\nSlide 3: \"Voucher-presente Espaço Viv — disponível agora.\"",hashtags:"#Páscoa #PresenteDePáscoa #EspaçoViv #SPABrasília #VoucherSpa #PresenteDeExperiência #BemEstar #Autocuidado #MassagemBrasília #WellnessBrasília",promptImagem:"Elegant spa gift presentation on warm linen surface: premium kraft gift box with champagne gold ribbon, dried flower bouquet with white and blush tones, handwritten-style gift card, massage oil bottle, warm natural lighting, subtle botanical elements, luxury wellness gift aesthetic, terracotta and cream palette, photorealistic, 4:5 ratio",imagemUrl:null,notasInternas:"Confirmar com Raissa o processo de emissão do voucher antes de publicar",responsavel:"Equipe SM"},
+{id:"post-07",titulo:"Feriado Tiradentes",formato:"Feed 4:5",semana:"Semana 4",dataPublicacao:"2026-04-18",pilar:"Sazonal",status:"Rascunho",copyLegenda:"Feriado prolongado.\n\nTrês opções: resolver coisas que acumularam, descansar tentando não resolver coisas que acumularam, ou vir para cá.\n\nO Espaço Viv está com agenda aberta para Tiradentes.\n\n→ Reserve pelo link na bio antes que encha.",copyStories:"Feriado de Tiradentes — agenda aberta. Última chance de reservar.",hashtags:"#Tiradentes #FeriadoProlongado #EspaçoViv #SPABrasília #DaySpa #FeriadoComBemEstar #MassagemBrasília #Relaxamento",promptImagem:"Serene spa lounge area: empty lounge chair with cream linen throw, side table with herbal tea, lush tropical plant in background, golden afternoon light filtering through sheer curtains, no people, warm and inviting, luxury day spa atmosphere, champagne and sage tones, photorealistic, 4:5 ratio",imagemUrl:null,notasInternas:"",responsavel:"Equipe SM"},
+{id:"post-08",titulo:"Série Terapeutas VIV",formato:"Feed 4:5",semana:"Semana 4",dataPublicacao:"2026-04-20",pilar:"Humanização",status:"Rascunho",copyLegenda:"As mãos que transformam uma sessão em ritual.\n\nPor trás de cada atendimento no Espaço Viv existe uma profissional que estudou, treinou e escolheu esse ofício.\n\nNão contratamos corpo disponível. Contratamos cuidado especializado.\n\nEssa é a diferença que você sente.",copyStories:"Conhece quem cuida de você? Série Terapeutas VIV — vê no feed.",hashtags:"#TerapeutasVIV #EspaçoViv #SPABrasília #MassagemProfissional #CuidadoEspecializado #BemEstar #TerapeutaDeMassagem #WellnessBrasília",promptImagem:"Elegant editorial portrait concept: spa therapist hands resting on clean white linen, well-manicured nails, warm bronze skin tone, soft natural sidelight, no face visible, intimate and professional, warm terracotta background, shallow depth of field, luxury wellness brand style, photorealistic, 4:5 ratio",imagemUrl:null,notasInternas:"Pegar foto real das terapeutas com Raissa para substituir imagem gerada",responsavel:"Equipe SM"}
+];
+
+function initSocialMedia(){
+  if(!appData.social_posts||!appData.social_posts.length){
+    appData.social_posts=INITIAL_SM_POSTS.map(function(p){return Object.assign({},p)});
+    saveSection('social_posts');
+  }
+  var now=new Date();ecalYear=now.getFullYear();ecalMonth=now.getMonth();
+  applySmPermissions();
+}
+
+function applySmPermissions(){
+  // Raissa: no create/edit/delete, no generator, no internal notes
+  if(currentUser==='Raissa'){
+    var nb=document.getElementById('smNewPostBtn');if(nb)nb.style.display='none';
+    var gt=document.getElementById('smGenTab');if(gt)gt.style.display='none';
+    var eb=document.getElementById('ecalNewBtn');if(eb)eb.style.display='none';
+  }
+  // Pedro: no generator
+  if(currentUser==='Pedro'){
+    var gt2=document.getElementById('smGenTab');if(gt2)gt2.style.display='none';
+  }
+}
+
+function switchSmTab(tab){
+  document.querySelectorAll('.sm-subtab').forEach(function(t){t.classList.remove('active')});
+  document.querySelector('.sm-subtab[data-sm="'+tab+'"]').classList.add('active');
+  document.querySelectorAll('.sm-panel').forEach(function(p){p.classList.remove('active')});
+  document.getElementById('sm-'+tab).classList.add('active');
+  if(tab==='posts')renderSmPosts();
+  if(tab==='editorial')renderEcal();
+  if(tab==='generator')renderTemplateList();
+}
+
+// ===== SM POSTS =====
+function getSmPosts(){return appData.social_posts||[]}
+
+function renderSmMetrics(){
+  var posts=getSmPosts();
+  var total=posts.length;
+  var pub=posts.filter(function(p){return p.status==='Publicado'}).length;
+  var apr=posts.filter(function(p){return p.status==='Aprovado'}).length;
+  var pen=posts.filter(function(p){return p.status==='Aprovação Pendente'}).length;
+  var ras=posts.filter(function(p){return p.status==='Rascunho'}).length;
+  document.getElementById('smMetrics').innerHTML=
+    '<div class="sm-metric"><div class="smv">'+total+'</div><div class="sml">Total</div></div>'+
+    '<div class="sm-metric"><div class="smv" style="color:var(--sm-blue)">'+pub+'</div><div class="sml">Publicado</div></div>'+
+    '<div class="sm-metric"><div class="smv" style="color:var(--green)">'+apr+'</div><div class="sml">Aprovado</div></div>'+
+    '<div class="sm-metric"><div class="smv" style="color:var(--yellow)">'+pen+'</div><div class="sml">Pendente</div></div>'+
+    '<div class="sm-metric"><div class="smv" style="color:var(--sm-gray)">'+ras+'</div><div class="sml">Rascunho</div></div>';
+}
+
+function filterSmPosts(f){
+  smFilter=f;
+  document.querySelectorAll('.sm-filter-btn').forEach(function(b){b.classList.remove('active')});
+  event.target.classList.add('active');
+  renderSmPosts();
+}
+
+function renderSmPosts(){
+  renderSmMetrics();
+  var posts=getSmPosts();
+  var formatFilter=document.getElementById('smFilterFormat').value;
+  var weekFilter=document.getElementById('smFilterWeek').value;
+  var search=(document.getElementById('smSearch').value||'').toLowerCase();
+  var filtered=posts.filter(function(p){
+    if(smFilter!=='todos'&&p.status!==smFilter)return false;
+    if(formatFilter&&p.formato!==formatFilter)return false;
+    if(weekFilter&&p.semana!==weekFilter)return false;
+    if(search&&p.titulo.toLowerCase().indexOf(search)<0&&(p.copyLegenda||'').toLowerCase().indexOf(search)<0)return false;
+    return true;
+  });
+  if(!filtered.length){document.getElementById('smPostsGrid').innerHTML='<div class="empty-state" style="grid-column:1/-1">Nenhum post encontrado</div>';return}
+  document.getElementById('smPostsGrid').innerHTML=filtered.map(function(p,i){
+    var fmtCls=getFormatBadgeClass(p.formato);
+    var stCls=getStatusBadgeClass(p.status);
+    var idx=posts.indexOf(p);
+    var canEdit=currentUser==='Equipe SM';
+    var canApprove=currentUser==='Raissa'&&p.status==='Aprovação Pendente';
+    return '<div class="post-card">'+
+      '<div class="post-card-header">'+
+        '<span class="badge-format '+fmtCls+'">'+getFormatLabel(p.formato)+'</span>'+
+        '<span class="badge '+stCls+'">'+p.status+'</span>'+
+      '</div>'+
+      '<div class="post-card-thumb">'+(p.imagemUrl?'<img src="'+esc(p.imagemUrl)+'" alt="">':'&#128247;')+'</div>'+
+      '<div class="post-card-body">'+
+        '<div class="pc-title">'+esc(p.titulo)+'</div>'+
+        '<div class="pc-meta">'+esc(p.semana)+' · '+formatDate(p.dataPublicacao)+'</div>'+
+        '<div class="pc-copy">'+esc(p.copyLegenda||'')+'</div>'+
+      '</div>'+
+      '<div class="post-card-actions">'+
+        '<button class="btn btn-ghost btn-sm" onclick="viewSmPost('+idx+')">Ver</button>'+
+        (canEdit?'<button class="btn btn-ghost btn-sm" onclick="openSmPostModal('+idx+')">Editar</button>'+
+        '<button class="btn btn-ghost btn-sm" onclick="deleteSmPost('+idx+')" style="color:var(--red)">Excluir</button>':'')+
+        (canApprove?'<button class="btn btn-primary btn-sm" onclick="approveSmPost('+idx+')">Aprovar</button>':'')+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+function getFormatBadgeClass(f){
+  if(!f)return'badge-feed';
+  if(f.indexOf('Reel')>=0)return'badge-reel';
+  if(f.indexOf('Carrossel')>=0)return'badge-carrossel';
+  if(f.indexOf('Stories')>=0)return'badge-stories';
+  return'badge-feed';
+}
+function getFormatLabel(f){
+  if(!f)return'FEED';
+  if(f.indexOf('Reel')>=0)return'REEL';
+  if(f.indexOf('Carrossel')>=0)return'CARROSSEL';
+  if(f.indexOf('Stories')>=0)return'STORIES';
+  return'FEED';
+}
+function getStatusBadgeClass(s){
+  var m={'Rascunho':'badge-status-rascunho','Aprovação Pendente':'badge-status-pendente','Aprovado':'badge-status-aprovado','Publicado':'badge-status-publicado','Arquivado':'badge-status-arquivado'};
+  return m[s]||'badge-status-rascunho';
+}
+function getFormatChipClass(f){
+  if(!f)return'feed';
+  if(f.indexOf('Reel')>=0)return'reel';
+  if(f.indexOf('Carrossel')>=0)return'carrossel';
+  if(f.indexOf('Stories')>=0)return'stories';
+  return'feed';
+}
+
+function viewSmPost(idx){
+  var p=getSmPosts()[idx];if(!p)return;
+  document.getElementById('modalBox').className='modal modal-lg';
+  document.getElementById('modalTitle').textContent=p.titulo;
+  var showNotes=currentUser!=='Raissa';
+  var canApprove=currentUser==='Raissa'&&p.status==='Aprovação Pendente';
+  document.getElementById('modalBody').innerHTML=
+    '<div class="modal-sections">'+
+    '<div><div class="modal-section-title">Identificação</div>'+
+    '<div class="form-row"><div><strong>Formato:</strong> '+esc(p.formato)+'</div><div><strong>Semana:</strong> '+esc(p.semana)+'</div></div>'+
+    '<div class="form-row" style="margin-top:8px"><div><strong>Data:</strong> '+formatDate(p.dataPublicacao)+'</div><div><strong>Pilar:</strong> '+esc(p.pilar)+'</div></div>'+
+    '<div style="margin-top:8px"><strong>Status:</strong> <span class="badge '+getStatusBadgeClass(p.status)+'">'+p.status+'</span></div></div>'+
+    '<div><div class="modal-section-title">Legenda</div><div style="white-space:pre-wrap;font-size:13px;line-height:1.6;color:var(--text-muted)">'+esc(p.copyLegenda)+'</div></div>'+
+    (p.copyStories?'<div><div class="modal-section-title">Copy Stories</div><div style="white-space:pre-wrap;font-size:12px;color:var(--text-muted)">'+esc(p.copyStories)+'</div></div>':'')+
+    '<div><div class="modal-section-title">Hashtags</div><div style="font-size:11px;color:var(--gold);word-wrap:break-word">'+esc(p.hashtags)+'</div></div>'+
+    '<div><div class="modal-section-title">Prompt de Imagem</div><div class="cli-block" style="font-size:10px">'+esc(p.promptImagem)+'</div></div>'+
+    (showNotes&&p.notasInternas?'<div><div class="modal-section-title">Notas Internas</div><div style="font-size:12px;color:var(--text-muted);font-style:italic">'+esc(p.notasInternas)+'</div></div>':'')+
+    '</div>';
+  document.getElementById('modalFooter').innerHTML=
+    (canApprove?'<button class="btn btn-primary" onclick="approveSmPost('+idx+');closeModal()">Aprovar Post</button>':'')+
+    '<button class="btn btn-ghost" onclick="closeModal()">Fechar</button>';
+  openModal();
+}
+
+function openSmPostModal(idx){
+  if(currentUser!=='Equipe SM')return;
+  editingSmPostId=idx!==undefined?idx:null;
+  var p=editingSmPostId!==null?getSmPosts()[editingSmPostId]:{};
+  document.getElementById('modalBox').className='modal modal-lg';
+  document.getElementById('modalTitle').textContent=editingSmPostId!==null?'Editar Post':'Novo Post';
+  var showNotes=currentUser!=='Raissa';
+  document.getElementById('modalBody').innerHTML=
+    '<div class="modal-sections">'+
+    '<div><div class="modal-section-title">Identificação</div>'+
+    '<div class="form-group"><label>Título do post</label><input id="fSmTitle" value="'+esc(p.titulo||'')+'"></div>'+
+    '<div class="form-row"><div class="form-group"><label>Formato</label><select id="fSmFormato"><option value="Feed 4:5"'+(p.formato==='Feed 4:5'?' selected':'')+'>Feed 4:5</option><option value="Reel 9:16"'+(p.formato==='Reel 9:16'?' selected':'')+'>Reel 9:16</option><option value="Stories 9:16"'+(p.formato==='Stories 9:16'?' selected':'')+'>Stories 9:16</option><option value="Carrossel 1:1"'+(p.formato==='Carrossel 1:1'?' selected':'')+'>Carrossel 1:1</option></select></div>'+
+    '<div class="form-group"><label>Semana</label><select id="fSmSemana"><option value="Semana 1"'+(p.semana==='Semana 1'?' selected':'')+'>Semana 1</option><option value="Semana 2"'+(p.semana==='Semana 2'?' selected':'')+'>Semana 2</option><option value="Semana 3"'+(p.semana==='Semana 3'?' selected':'')+'>Semana 3</option><option value="Semana 4"'+(p.semana==='Semana 4'?' selected':'')+'>Semana 4</option></select></div></div>'+
+    '<div class="form-row"><div class="form-group"><label>Data prevista</label><input type="date" id="fSmData" value="'+(p.dataPublicacao||'')+'"></div>'+
+    '<div class="form-group"><label>Pilar de conteúdo</label><select id="fSmPilar"><option value="Institucional"'+(p.pilar==='Institucional'?' selected':'')+'>Institucional</option><option value="Educativo"'+(p.pilar==='Educativo'?' selected':'')+'>Educativo</option><option value="Conversão"'+(p.pilar==='Conversão'?' selected':'')+'>Conversão</option><option value="Humanização"'+(p.pilar==='Humanização'?' selected':'')+'>Humanização</option><option value="Sazonal"'+(p.pilar==='Sazonal'?' selected':'')+'>Sazonal</option><option value="ASMR/Sensorial"'+(p.pilar==='ASMR/Sensorial'?' selected':'')+'>ASMR/Sensorial</option></select></div></div>'+
+    '<div class="form-group"><label>Responsável</label><select id="fSmResp"><option value="Equipe SM"'+(p.responsavel==='Equipe SM'?' selected':'')+'>Equipe SM</option><option value="Pedro"'+(p.responsavel==='Pedro'?' selected':'')+'>Pedro</option><option value="Raissa"'+(p.responsavel==='Raissa'?' selected':'')+'>Raissa</option></select></div></div>'+
+    '<div><div class="modal-section-title">Conteúdo</div>'+
+    '<div class="form-group"><label>Copy da Legenda</label><textarea id="fSmCopy" rows="8" oninput="document.getElementById(\'fSmCopyCount\').textContent=this.value.length">'+(p.copyLegenda||'').replace(/"/g,'&quot;')+'</textarea><div class="char-counter"><span id="fSmCopyCount">'+(p.copyLegenda||'').length+'</span> caracteres</div></div>'+
+    '<div class="form-group"><label>Copy para Stories</label><textarea id="fSmStories" rows="4">'+(p.copyStories||'').replace(/"/g,'&quot;')+'</textarea></div>'+
+    '<div class="form-group"><label>Hashtags</label><textarea id="fSmHashtags" rows="3">'+(p.hashtags||'').replace(/"/g,'&quot;')+'</textarea></div></div>'+
+    '<div><div class="modal-section-title">Imagem</div>'+
+    '<div class="form-group"><label>Prompt de Imagem (Nano Banana 2)</label><textarea id="fSmPrompt" rows="6">'+(p.promptImagem||'').replace(/"/g,'&quot;')+'</textarea></div></div>'+
+    '<div><div class="modal-section-title">Status e Aprovação</div>'+
+    '<div class="form-group"><label>Status</label><select id="fSmStatus"><option value="Rascunho"'+(p.status==='Rascunho'?' selected':'')+'>Rascunho</option><option value="Aprovação Pendente"'+(p.status==='Aprovação Pendente'?' selected':'')+'>Aprovação Pendente</option><option value="Aprovado"'+(p.status==='Aprovado'?' selected':'')+'>Aprovado</option><option value="Publicado"'+(p.status==='Publicado'?' selected':'')+'>Publicado</option><option value="Arquivado"'+(p.status==='Arquivado'?' selected':'')+'>Arquivado</option></select></div>'+
+    (showNotes?'<div class="form-group"><label>Notas internas</label><textarea id="fSmNotes" rows="3">'+(p.notasInternas||'').replace(/"/g,'&quot;')+'</textarea></div>':'')+
+    '</div></div>';
+  document.getElementById('modalFooter').innerHTML=
+    '<button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>'+
+    '<button class="btn btn-ghost" onclick="saveSmPost(\'Rascunho\')">Salvar Rascunho</button>'+
+    '<button class="btn btn-primary" onclick="saveSmPost(\'Aprovação Pendente\')">Enviar para Aprovação</button>';
+  openModal();
+}
+
+function saveSmPost(statusOverride){
+  var titulo=document.getElementById('fSmTitle').value.trim();
+  if(!titulo)return showToast('Preencha o título','error');
+  var post={
+    id:editingSmPostId!==null?getSmPosts()[editingSmPostId].id:'sm-'+Date.now(),
+    titulo:titulo,
+    formato:document.getElementById('fSmFormato').value,
+    semana:document.getElementById('fSmSemana').value,
+    dataPublicacao:document.getElementById('fSmData').value,
+    pilar:document.getElementById('fSmPilar').value,
+    status:statusOverride||document.getElementById('fSmStatus').value,
+    copyLegenda:document.getElementById('fSmCopy').value,
+    copyStories:document.getElementById('fSmStories').value,
+    hashtags:document.getElementById('fSmHashtags').value,
+    promptImagem:document.getElementById('fSmPrompt').value,
+    imagemUrl:editingSmPostId!==null?getSmPosts()[editingSmPostId].imagemUrl:null,
+    notasInternas:document.getElementById('fSmNotes')?document.getElementById('fSmNotes').value:'',
+    responsavel:document.getElementById('fSmResp').value
+  };
+  if(!appData.social_posts)appData.social_posts=[];
+  if(editingSmPostId!==null)appData.social_posts[editingSmPostId]=post;
+  else appData.social_posts.push(post);
+  saveSection('social_posts');
+  closeModal();
+  renderSmPosts();
+  renderEcal();
+  renderDashboard();
+  showToast('Post salvo!','success');
+}
+
+function deleteSmPost(idx){
+  if(currentUser!=='Equipe SM')return;
+  if(!confirm('Excluir este post?'))return;
+  appData.social_posts.splice(idx,1);
+  saveSection('social_posts');
+  renderSmPosts();
+  renderEcal();
+  showToast('Post excluído','success');
+}
+
+function approveSmPost(idx){
+  var posts=getSmPosts();
+  if(posts[idx]){
+    posts[idx].status='Aprovado';
+    appData.social_posts=posts;
+    saveSection('social_posts');
+    renderSmPosts();
+    renderEcal();
+    showToast('Post aprovado!','success');
+  }
+}
+
+// ===== EDITORIAL CALENDAR =====
+function renderEcal(){
+  var months=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  document.getElementById('ecalMonth').textContent=months[ecalMonth]+' '+ecalYear;
+  if(ecalView==='month')renderEcalMonth();
+  else renderEcalWeek();
+}
+function ecalNav(dir){ecalMonth+=dir;if(ecalMonth>11){ecalMonth=0;ecalYear++}if(ecalMonth<0){ecalMonth=11;ecalYear--}renderEcal()}
+function setEcalView(v){
+  ecalView=v;
+  document.getElementById('ecalMonthBtn').className=v==='month'?'active':'';
+  document.getElementById('ecalWeekBtn').className=v==='week'?'active':'';
+  renderEcal();
+}
+
+function renderEcalMonth(){
+  var posts=getSmPosts();
+  var firstDay=new Date(ecalYear,ecalMonth,1),lastDay=new Date(ecalYear,ecalMonth+1,0);
+  var startWeekday=firstDay.getDay(),today=new Date();
+  var html=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'].map(function(d){return'<div class="ecal-day-head">'+d+'</div>'}).join('');
+  var prevLast=new Date(ecalYear,ecalMonth,0).getDate();
+  for(var i=startWeekday-1;i>=0;i--)html+='<div class="ecal-day other"><div class="eday-num">'+(prevLast-i)+'</div></div>';
+  for(var d=1;d<=lastDay.getDate();d++){
+    var dateStr=ecalYear+'-'+String(ecalMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    var isToday=today.getFullYear()===ecalYear&&today.getMonth()===ecalMonth&&today.getDate()===d;
+    var dayPosts=posts.filter(function(p){return p.dataPublicacao===dateStr});
+    var chipsHtml='';
+    dayPosts.slice(0,3).forEach(function(p){
+      var cls=getFormatChipClass(p.formato);
+      var dotColor=p.status==='Publicado'?'var(--green)':p.status==='Aprovação Pendente'?'var(--yellow)':'transparent';
+      var pidx=posts.indexOf(p);
+      chipsHtml+='<div class="ecal-chip '+cls+'" onclick="event.stopPropagation();viewSmPost('+pidx+')" title="'+esc(p.titulo)+'">'+esc(p.titulo)+'<div class="status-dot" style="background:'+dotColor+'"></div></div>';
+    });
+    if(dayPosts.length>3)chipsHtml+='<div style="font-size:8px;color:var(--text-dim);text-align:center">+'+(dayPosts.length-3)+'</div>';
+    html+='<div class="ecal-day'+(isToday?' today':'')+'" onclick="openSmPostModalWithDate(\''+dateStr+'\')"><div class="eday-num">'+d+'</div>'+chipsHtml+'</div>';
+  }
+  var totalCells=startWeekday+lastDay.getDate(),rem=(7-(totalCells%7))%7;
+  for(var j=1;j<=rem;j++)html+='<div class="ecal-day other"><div class="eday-num">'+j+'</div></div>';
+  document.getElementById('ecalContent').innerHTML='<div class="ecal-grid">'+html+'</div>';
+}
+
+function renderEcalWeek(){
+  var posts=getSmPosts();
+  var html='';
+  for(var w=1;w<=4;w++){
+    var weekPosts=posts.filter(function(p){return p.semana==='Semana '+w});
+    var cardsHtml=weekPosts.length?weekPosts.map(function(p){
+      var cls=getFormatBadgeClass(p.formato);
+      var stCls=getStatusBadgeClass(p.status);
+      var pidx=posts.indexOf(p);
+      return'<div class="ecal-week-card" onclick="viewSmPost('+pidx+')">'+
+        '<div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge-format '+cls+'" style="font-size:8px">'+getFormatLabel(p.formato)+'</span><span class="badge '+stCls+'" style="font-size:8px">'+p.status+'</span></div>'+
+        '<div class="ewc-title">'+esc(p.titulo)+'</div>'+
+        '<div class="ewc-meta">'+formatDate(p.dataPublicacao)+' · '+esc(p.pilar)+'</div></div>';
+    }).join(''):'<div class="empty-state" style="padding:20px;font-size:11px">Nenhum post</div>';
+    html+='<div class="ecal-week-col"><div class="ecal-week-head">Semana '+w+'</div><div class="ecal-week-body">'+cardsHtml+'</div></div>';
+  }
+  document.getElementById('ecalContent').innerHTML='<div class="ecal-weeks">'+html+'</div>';
+}
+
+function openSmPostModalWithDate(date){
+  if(currentUser!=='Equipe SM')return;
+  openSmPostModal();
+  setTimeout(function(){var el=document.getElementById('fSmData');if(el)el.value=date},50);
+}
+
+// ===== CONTENT GENERATOR =====
+function switchGenOutput(tab){
+  document.querySelectorAll('.gen-output-tab').forEach(function(t){t.classList.remove('active')});
+  event.target.classList.add('active');
+  document.querySelectorAll('.gen-panel').forEach(function(p){p.classList.remove('active')});
+  document.getElementById(tab==='copy'?'genPanelCopy':'genPanelPrompt').classList.add('active');
+}
+function updateGenAspect(){
+  var f=document.getElementById('genFormato').value;
+  var ar=f.indexOf('4:5')>=0?'4:5':f.indexOf('9:16')>=0?'9:16':'1:1';
+  document.getElementById('genAspect').textContent=ar;
+  updateCliBlock();
+}
+function updateCliBlock(){
+  var prompt=document.getElementById('genPrompt').value||'...';
+  var ar=document.getElementById('genAspect').textContent;
+  document.getElementById('genCliBlock').textContent="infsh app run google/gemini-3-1-flash-image-preview \\\n  --input '{\"prompt\": \""+prompt.substring(0,60)+'...", "aspect_ratio": "'+ar+'", "resolution": "2K"}\'';
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var gc=document.getElementById('genCopy');
+  if(gc)gc.addEventListener('input',function(){document.getElementById('genCopyCount').textContent=this.value.length});
+  var gp=document.getElementById('genPrompt');
+  if(gp)gp.addEventListener('input',updateCliBlock);
+});
+
+function renderTemplateList(){
+  var posts=INITIAL_SM_POSTS;
+  document.getElementById('templateList').innerHTML=posts.map(function(p,i){
+    return'<div class="template-list-item" onclick="loadTemplate('+i+')"><div class="tl-title">'+esc(p.titulo)+'</div><div class="tl-pilar">'+esc(p.pilar)+' · '+esc(p.formato)+'</div></div>';
+  }).join('');
+}
+function toggleTemplateList(){
+  var el=document.getElementById('templateList');
+  el.classList.toggle('open');
+}
+function loadTemplate(idx){
+  var p=INITIAL_SM_POSTS[idx];
+  document.getElementById('genPilar').value=p.pilar;
+  document.getElementById('genFormato').value=p.formato;
+  updateGenAspect();
+  document.getElementById('genCopy').value=p.copyLegenda;
+  document.getElementById('genCopyCount').textContent=p.copyLegenda.length;
+  document.getElementById('genStories').value=p.copyStories;
+  document.getElementById('genHashtags').value=p.hashtags;
+  document.getElementById('genPrompt').value=p.promptImagem;
+  updateCliBlock();
+  document.getElementById('templateList').classList.remove('open');
+  showToast('Template carregado!','success');
+}
+
+function copyField(id){
+  var el=document.getElementById(id);
+  if(el){navigator.clipboard.writeText(el.value).then(function(){showToast('Copiado!','success')}).catch(function(){el.select();document.execCommand('copy');showToast('Copiado!','success')})}
+}
+function copyCliCmd(){
+  var text=document.getElementById('genCliBlock').textContent;
+  navigator.clipboard.writeText(text).then(function(){showToast('Comando copiado!','success')}).catch(function(){showToast('Erro ao copiar','error')});
+}
+
+function saveGenAsDraft(){
+  var titulo=document.getElementById('genTema').value.trim()||'Post gerado '+new Date().toLocaleDateString('pt-BR');
+  var post={
+    id:'sm-gen-'+Date.now(),titulo:titulo,
+    formato:document.getElementById('genFormato').value,
+    semana:'Semana 1',dataPublicacao:'',
+    pilar:document.getElementById('genPilar').value,
+    status:'Rascunho',
+    copyLegenda:document.getElementById('genCopy').value,
+    copyStories:document.getElementById('genStories').value,
+    hashtags:document.getElementById('genHashtags').value,
+    promptImagem:document.getElementById('genPrompt').value,
+    imagemUrl:null,notasInternas:'',responsavel:'Equipe SM'
+  };
+  if(!appData.social_posts)appData.social_posts=[];
+  appData.social_posts.push(post);
+  saveSection('social_posts');
+  renderSmPosts();
+  showToast('Rascunho salvo na aba Posts!','success');
+}
+
+function addGenToCalendar(){
+  saveGenAsDraft();
+  switchSmTab('editorial');
+}
+
+// ===== OVERRIDE switchTab to support socialmedia =====
+var _origSwitchTab=switchTab;
+switchTab=function(tab){
+  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active')});
+  var navBtn=document.querySelector('.nav-item[data-tab="'+tab+'"]');if(navBtn)navBtn.classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});
+  document.getElementById('tab-'+tab).classList.add('active');
+  var t={dashboard:'Dashboard',calendar:'Calendário de Conteúdo',socialmedia:'Social Media',metaads:'Meta Ads',report:'Relatório',config:'Configurações'};
+  document.getElementById('pageTitle').textContent=t[tab]||tab;
+  if(tab==='calendar')renderCalendar();
+  if(tab==='socialmedia'){renderSmPosts();renderEcal();applySmPermissions();}
+};
+
+// ===== OVERRIDE renderAll to include SM =====
+var _origRenderAll=renderAll;
+renderAll=function(){
+  renderDashboard();renderCalendar();renderAds();renderCampaigns();renderPerformance();renderReport();renderConfig();renderTasks();
+  if(appData.social_posts){renderSmPosts();renderEcal();}
+};
+
+// ===== OVERRIDE closeModal to reset modal size =====
+var _origCloseModal=closeModal;
+closeModal=function(e){
+  if(e&&e.target!==document.getElementById('modalOverlay'))return;
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.getElementById('modalBox').className='modal';
+};
+
+// ===== OVERRIDE doLogin to init SM =====
+var _origDoLogin=doLogin;
+doLogin=function(user){
+  currentUser=user;
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('sidebar').style.display='flex';
+  document.getElementById('mainArea').style.display='flex';
+  renderCurrentUser();connectSSE();
+  loadAllData();
+  setTimeout(initSocialMedia,500);
+};
+
+// ===== OVERRIDE renderDashboard to include SM posts =====
+var _origRenderDashboard=renderDashboard;
+renderDashboard=function(){
+  _origRenderDashboard();
+  // Add upcoming SM posts to tasks table
+  var smPosts=appData.social_posts||[];
+  var now=new Date();
+  var in7=new Date(now.getTime()+7*864e5);
+  var upcoming=smPosts.filter(function(p){
+    if(!p.dataPublicacao)return false;
+    var d=new Date(p.dataPublicacao+'T00:00:00');
+    return d>=now&&d<=in7&&p.status!=='Publicado'&&p.status!=='Arquivado';
+  }).sort(function(a,b){return a.dataPublicacao.localeCompare(b.dataPublicacao)});
+  if(upcoming.length){
+    var tbody=document.getElementById('tasksBody');
+    var extraRows=upcoming.map(function(p){
+      var fmtCls=getFormatBadgeClass(p.formato);
+      var stCls=getStatusBadgeClass(p.status);
+      return'<tr style="opacity:0.85"><td>📸 '+esc(p.titulo)+'</td><td>'+formatDate(p.dataPublicacao)+'</td><td><span class="badge '+stCls+'">'+p.status+'</span></td><td><span class="badge-format '+fmtCls+'" style="font-size:9px">'+getFormatLabel(p.formato)+'</span></td><td></td></tr>';
+    }).join('');
+    tbody.innerHTML+=extraRows;
+  }
+};
+
+// ===== Update sectionName for SSE =====
+var _origSectionName=sectionName;
+sectionName=function(s){
+  if(s==='social_posts')return'Social Media';
+  return _origSectionName(s);
+};
 </script>
 </body>
 </html>
