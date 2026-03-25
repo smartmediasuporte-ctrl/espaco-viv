@@ -789,15 +789,19 @@ function initSocialMedia(){
 }
 
 function applySmPermissions(){
+  // Reset all to visible first
+  var nb=document.getElementById('smNewPostBtn');if(nb)nb.style.display='';
+  var gt=document.getElementById('smGenTab');if(gt)gt.style.display='';
+  var eb=document.getElementById('ecalNewBtn');if(eb)eb.style.display='';
   // Raissa: no create/edit/delete, no generator, no internal notes
   if(currentUser==='Raissa'){
-    var nb=document.getElementById('smNewPostBtn');if(nb)nb.style.display='none';
-    var gt=document.getElementById('smGenTab');if(gt)gt.style.display='none';
-    var eb=document.getElementById('ecalNewBtn');if(eb)eb.style.display='none';
+    if(nb)nb.style.display='none';
+    if(gt)gt.style.display='none';
+    if(eb)eb.style.display='none';
   }
   // Pedro: no generator
   if(currentUser==='Pedro'){
-    var gt2=document.getElementById('smGenTab');if(gt2)gt2.style.display='none';
+    if(gt)gt.style.display='none';
   }
 }
 
