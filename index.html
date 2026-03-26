@@ -571,7 +571,7 @@ tr:hover td{background:rgba(255,255,255,0.01)}
                   </div>
                 </div>
                 <div id="genImgPlaceholder" style="border:2px dashed var(--border);border-radius:var(--radius);padding:40px;text-align:center;color:var(--text-dim);font-size:12px">
-                  Escreva um prompt acima e clique em "Gerar Imagem" para criar a imagem com IA<br><span style="font-size:10px;margin-top:4px;display:block;color:var(--text-dim)">Powered by Pollinations.ai — gratuito e sem limites</span>
+                  Escreva um prompt acima e clique em "Gerar Imagem" para criar a imagem com IA<br><span style="font-size:10px;margin-top:4px;display:block;color:var(--text-dim)">Powered by Stable Horde — gratuito, pode levar 30-90s</span>
                 </div>
               </div>
               <div class="gen-field">
@@ -1160,55 +1160,60 @@ function copyCliCmd(){
   navigator.clipboard.writeText(text).then(function(){showToast('Comando copiado!','success')}).catch(function(){showToast('Erro ao copiar','error')});
 }
 
-// ===== IMAGE GENERATION (Pollinations.ai) =====
+// ===== IMAGE GENERATION (Stable Horde via server proxy) =====
 var genImgSeed=0;
 function generateImage(){
   var prompt=document.getElementById('genPrompt').value.trim();
   if(!prompt){showToast('Preencha o prompt de imagem primeiro','error');return}
   var aspect=document.getElementById('genAspect').textContent;
-  var w=1024,h=1280; // default 4:5
-  if(aspect==='9:16'){w=768;h=1365}
+  var w=1024,h=1280;
+  if(aspect==='9:16'){w=768;h=1344}
   else if(aspect==='1:1'){w=1024;h=1024}
-  else if(aspect==='16:9'){w=1365;h=768}
-  genImgSeed=Math.floor(Math.random()*999999);
-  // Clean prompt for URL - replace spaces with underscores, remove special chars
-  var cleanPrompt=prompt.replace(/[^\w\s,.-]/g,'').substring(0,400).trim().replace(/\s+/g,'_');
-  var url='https://pollinations.ai/p/'+encodeURIComponent(cleanPrompt)+'?width='+w+'&height='+h+'&seed='+genImgSeed+'&model=flux&nologo=true';
+  else if(aspect==='16:9'){w=1344;h=768}
   document.getElementById('genImgPlaceholder').style.display='none';
   document.getElementById('genImgPreview').style.display='none';
   var status=document.getElementById('genImgStatus');
   status.style.display='block';
-  status.innerHTML='<span style="color:var(--accent)">⏳ Gerando imagem... pode levar 15-40 segundos</span>';
+  status.innerHTML='<span style="color:var(--accent)">⏳ Gerando imagem com IA... pode levar 30-90 segundos</span>';
   var btn=document.getElementById('genImgBtn');
   btn.disabled=true;
   btn.innerHTML='⏳ Gerando...';
-  var img=document.getElementById('genImgResult');
-  img.crossOrigin='anonymous';
-  img.onload=function(){
-    document.getElementById('genImgPreview').style.display='block';
-    status.innerHTML='<span style="color:var(--green-light)">✓ Imagem gerada com sucesso!</span>';
-    btn.disabled=false;
-    btn.innerHTML='🎨 Gerar Imagem com IA';
-    showToast('Imagem gerada!','success');
-  };
-  img.onerror=function(){
-    // Retry once without crossOrigin
-    img.crossOrigin=null;
-    img.onload=function(){
-      document.getElementById('genImgPreview').style.display='block';
-      status.innerHTML='<span style="color:var(--green-light)">✓ Imagem gerada!</span>';
-      btn.disabled=false;
-      btn.innerHTML='🎨 Gerar Imagem com IA';
-    };
-    img.onerror=function(){
-      status.innerHTML='<span style="color:var(--red)">✕ Erro ao gerar. Tente simplificar o prompt (menos palavras, sem caracteres especiais).</span>';
+  fetch('/api/generate-image',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({prompt:prompt,width:w,height:h})
+  })
+  .then(function(r){return r.json()})
+  .then(function(data){
+    if(data.url){
+      var img=document.getElementById('genImgResult');
+      img.onload=function(){
+        document.getElementById('genImgPreview').style.display='block';
+        status.innerHTML='<span style="color:var(--green-light)">✓ Imagem gerada com sucesso!</span>';
+        btn.disabled=false;
+        btn.innerHTML='🎨 Gerar Imagem com IA';
+        showToast('Imagem gerada!','success');
+      };
+      img.onerror=function(){
+        status.innerHTML='<span style="color:var(--red)">✕ Erro ao carregar imagem. A URL pode ter expirado.</span>';
+        document.getElementById('genImgPlaceholder').style.display='block';
+        btn.disabled=false;
+        btn.innerHTML='🎨 Gerar Imagem com IA';
+      };
+      img.src=data.url;
+    } else {
+      status.innerHTML='<span style="color:var(--red)">✕ '+(data.error||'Erro desconhecido')+'. Tente novamente.</span>';
       document.getElementById('genImgPlaceholder').style.display='block';
       btn.disabled=false;
       btn.innerHTML='🎨 Gerar Imagem com IA';
-    };
-    img.src=url+'&t='+Date.now()+'&nofeed=true';
-  };
-  img.src=url;
+    }
+  })
+  .catch(function(err){
+    status.innerHTML='<span style="color:var(--red)">✕ Erro de conexão: '+err.message+'</span>';
+    document.getElementById('genImgPlaceholder').style.display='block';
+    btn.disabled=false;
+    btn.innerHTML='🎨 Gerar Imagem com IA';
+  });
 }
 
 function generateImageVariation(){

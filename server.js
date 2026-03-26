@@ -1,4 +1,5 @@
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
@@ -146,6 +147,107 @@ const server = http.createServer((req, res) => {
     }
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(users));
+    return;
+  }
+
+  // ===== IMAGE GENERATION PROXY (Stable Horde - free) =====
+  if (pathname === '/api/generate-image' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        const { prompt, width, height } = JSON.parse(body);
+        if (!prompt) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'prompt required' }));
+          return;
+        }
+        // Step 1: Submit to Stable Horde
+        const postData = JSON.stringify({
+          prompt: prompt.substring(0, 500),
+          params: { width: width || 512, height: height || 640, steps: 25, cfg_scale: 7 },
+          nsfw: false,
+          models: ['AlbedoBase XL (SDXL)'],
+          r2: true
+        });
+        const reqOpts = {
+          hostname: 'stablehorde.net',
+          path: '/api/v2/generate/async',
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': '0000000000', 'Content-Length': Buffer.byteLength(postData) }
+        };
+        const hReq = https.request(reqOpts, (hRes) => {
+          let data = '';
+          hRes.on('data', c => data += c);
+          hRes.on('end', () => {
+            try {
+              const result = JSON.parse(data);
+              if (!result.id) {
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: 'Failed to submit', detail: data }));
+                return;
+              }
+              // Step 2: Poll for result
+              let attempts = 0;
+              const maxAttempts = 60;
+              const pollInterval = setInterval(() => {
+                attempts++;
+                if (attempts > maxAttempts) {
+                  clearInterval(pollInterval);
+                  res.writeHead(504, { 'Content-Type': 'application/json' });
+                  res.end(JSON.stringify({ error: 'Timeout - try again' }));
+                  return;
+                }
+                https.get(`https://stablehorde.net/api/v2/generate/check/${result.id}`, (checkRes) => {
+                  let cData = '';
+                  checkRes.on('data', c => cData += c);
+                  checkRes.on('end', () => {
+                    try {
+                      const check = JSON.parse(cData);
+                      if (check.done) {
+                        clearInterval(pollInterval);
+                        // Get the result
+                        https.get(`https://stablehorde.net/api/v2/generate/status/${result.id}`, (statusRes) => {
+                          let sData = '';
+                          statusRes.on('data', c => sData += c);
+                          statusRes.on('end', () => {
+                            try {
+                              const status = JSON.parse(sData);
+                              if (status.generations && status.generations.length > 0) {
+                                res.writeHead(200, { 'Content-Type': 'application/json' });
+                                res.end(JSON.stringify({ url: status.generations[0].img, id: result.id }));
+                              } else {
+                                res.writeHead(500, { 'Content-Type': 'application/json' });
+                                res.end(JSON.stringify({ error: 'No image generated' }));
+                              }
+                            } catch (e) {
+                              res.writeHead(500, { 'Content-Type': 'application/json' });
+                              res.end(JSON.stringify({ error: e.message }));
+                            }
+                          });
+                        });
+                      }
+                    } catch (e) { /* keep polling */ }
+                  });
+                });
+              }, 3000);
+            } catch (e) {
+              res.writeHead(500, { 'Content-Type': 'application/json' });
+              res.end(JSON.stringify({ error: e.message }));
+            }
+          });
+        });
+        hReq.on('error', (e) => {
+          res.writeHead(500, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: e.message }));
+        });
+        hReq.write(postData);
+        hReq.end();
+      } catch (e) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
     return;
   }
 
