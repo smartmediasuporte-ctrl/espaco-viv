@@ -163,11 +163,11 @@ const server = http.createServer((req, res) => {
           return;
         }
         // Step 1: Submit to Stable Horde
+        // Stable Horde free: 512x512 + no model = fastest queue (5-15s)
         const postData = JSON.stringify({
           prompt: prompt.substring(0, 500),
-          params: { width: width || 512, height: height || 640, steps: 25, cfg_scale: 7 },
+          params: { width: 512, height: 512, steps: 15, cfg_scale: 7, sampler_name: 'k_euler' },
           nsfw: false,
-          models: ['AlbedoBase XL (SDXL)'],
           r2: true
         });
         const reqOpts = {
