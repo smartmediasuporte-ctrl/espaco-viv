@@ -1,11 +1,11 @@
 {
   "config": {
     "cliente": "Espaco Viv",
-    "dateStart": "2026-03-11",
+    "dateStart": "2026-03-24",
     "dateEnd": "2026-04-24",
     "valor": 3500,
-    "metaPosts": 20,
-    "adsBudget": 0
+    "metaPosts": 18,
+    "adsBudget": 1000
   },
   "tasks": [
     {
@@ -26,8 +26,67 @@
     "adsUsed": 0,
     "adsTotal": 0
   },
-  "report": {},
-  "report_history": [],
+  "report": {
+    "period": "",
+    "date": "",
+    "summary": "",
+    "posts": 0,
+    "orgReach": 0,
+    "engagement": 0,
+    "followers": 0,
+    "adsInvest": 0,
+    "adReach": 0,
+    "adLeads": 0,
+    "adConv": 0,
+    "cpa": 0,
+    "highlights": [],
+    "improvements": [],
+    "nextSteps": []
+  },
+  "report_history": [
+    {
+      "date": "2026-03-25T04:39:56.457Z",
+      "period": "Sem período",
+      "data": {
+        "period": "",
+        "date": "",
+        "summary": "",
+        "posts": 0,
+        "orgReach": 0,
+        "engagement": 0,
+        "followers": 0,
+        "adsInvest": 0,
+        "adReach": 0,
+        "adLeads": 0,
+        "adConv": 0,
+        "cpa": 0,
+        "highlights": [],
+        "improvements": [],
+        "nextSteps": []
+      }
+    },
+    {
+      "date": "2026-03-25T04:39:55.289Z",
+      "period": "Sem período",
+      "data": {
+        "period": "",
+        "date": "",
+        "summary": "",
+        "posts": 0,
+        "orgReach": 0,
+        "engagement": 0,
+        "followers": 0,
+        "adsInvest": 0,
+        "adReach": 0,
+        "adLeads": 0,
+        "adConv": 0,
+        "cpa": 0,
+        "highlights": [],
+        "improvements": [],
+        "nextSteps": []
+      }
+    }
+  ],
   "social_posts": [
     {
       "id": "post-01",
