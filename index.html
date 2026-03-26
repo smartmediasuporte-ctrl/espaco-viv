@@ -934,7 +934,7 @@ function viewSmPost(idx){
 }
 
 function openSmPostModal(idx){
-  if(currentUser!=='Equipe SM')return;
+  if(currentUser==='Raissa')return showToast('Apenas Equipe SM e Pedro podem criar/editar posts','info');
   editingSmPostId=idx!==undefined?idx:null;
   var p=editingSmPostId!==null?getSmPosts()[editingSmPostId]:{};
   document.getElementById('modalBox').className='modal modal-lg';
@@ -997,7 +997,7 @@ function saveSmPost(statusOverride){
 }
 
 function deleteSmPost(idx){
-  if(currentUser!=='Equipe SM')return;
+  if(currentUser==='Raissa')return showToast('Apenas Equipe SM e Pedro podem excluir posts','info');
   if(!confirm('Excluir este post?'))return;
   appData.social_posts.splice(idx,1);
   saveSection('social_posts');
