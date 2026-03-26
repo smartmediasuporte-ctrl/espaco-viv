@@ -555,7 +555,24 @@ tr:hover td{background:rgba(255,255,255,0.01)}
               </div>
               <div class="gen-field">
                 <div class="gen-field-header"><label>Prompt Nano Banana 2</label><button class="copy-btn" onclick="copyField('genPrompt')">Copiar Prompt</button></div>
-                <textarea id="genPrompt" rows="8" placeholder="Prompt de imagem aparecerá aqui..."></textarea>
+                <textarea id="genPrompt" rows="6" placeholder="Prompt de imagem aparecerá aqui..."></textarea>
+              </div>
+              <div class="gen-field">
+                <div style="display:flex;gap:8px;margin-bottom:12px">
+                  <button class="btn btn-primary" onclick="generateImage()" id="genImgBtn" style="flex:1">🎨 Gerar Imagem com IA</button>
+                  <button class="btn btn-ghost" onclick="generateImageVariation()" title="Gerar variação">🔄</button>
+                </div>
+                <div id="genImgStatus" style="font-size:11px;color:var(--text-muted);margin-bottom:8px;display:none"></div>
+                <div id="genImgPreview" style="display:none;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative;background:var(--bg)">
+                  <img id="genImgResult" style="width:100%;display:block" alt="Imagem gerada">
+                  <div style="position:absolute;bottom:0;left:0;right:0;padding:8px;background:linear-gradient(transparent,rgba(0,0,0,0.8));display:flex;gap:6px;justify-content:flex-end">
+                    <button class="btn btn-sm btn-ghost" onclick="downloadGenImage()" style="background:rgba(0,0,0,0.5);color:#fff;border-color:rgba(255,255,255,0.2)">⬇ Download</button>
+                    <button class="btn btn-sm btn-primary" onclick="useGenImage()">✓ Usar no Post</button>
+                  </div>
+                </div>
+                <div id="genImgPlaceholder" style="border:2px dashed var(--border);border-radius:var(--radius);padding:40px;text-align:center;color:var(--text-dim);font-size:12px">
+                  Escreva um prompt acima e clique em "Gerar Imagem" para criar a imagem com IA<br><span style="font-size:10px;margin-top:4px;display:block;color:var(--text-dim)">Powered by Pollinations.ai — gratuito e sem limites</span>
+                </div>
               </div>
               <div class="gen-field">
                 <div class="gen-field-header"><label>Comando CLI</label><button class="copy-btn" onclick="copyCliCmd()">Copiar Comando</button></div>
@@ -1143,6 +1160,70 @@ function copyCliCmd(){
   navigator.clipboard.writeText(text).then(function(){showToast('Comando copiado!','success')}).catch(function(){showToast('Erro ao copiar','error')});
 }
 
+// ===== IMAGE GENERATION (Pollinations.ai) =====
+var genImgSeed=0;
+function generateImage(){
+  var prompt=document.getElementById('genPrompt').value.trim();
+  if(!prompt){showToast('Preencha o prompt de imagem primeiro','error');return}
+  var aspect=document.getElementById('genAspect').textContent;
+  var w=1024,h=1280; // default 4:5
+  if(aspect==='9:16'){w=768;h=1365}
+  else if(aspect==='1:1'){w=1024;h=1024}
+  else if(aspect==='16:9'){w=1365;h=768}
+  genImgSeed=Math.floor(Math.random()*999999);
+  var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt)+'?width='+w+'&height='+h+'&seed='+genImgSeed+'&model=flux&nologo=true';
+  document.getElementById('genImgPlaceholder').style.display='none';
+  document.getElementById('genImgPreview').style.display='none';
+  var status=document.getElementById('genImgStatus');
+  status.style.display='block';
+  status.innerHTML='<span style="color:var(--accent)">⏳ Gerando imagem... pode levar 10-30 segundos</span>';
+  var btn=document.getElementById('genImgBtn');
+  btn.disabled=true;
+  btn.innerHTML='⏳ Gerando...';
+  var img=document.getElementById('genImgResult');
+  img.onload=function(){
+    document.getElementById('genImgPreview').style.display='block';
+    status.innerHTML='<span style="color:var(--green-light)">✓ Imagem gerada com sucesso!</span>';
+    btn.disabled=false;
+    btn.innerHTML='🎨 Gerar Imagem com IA';
+    showToast('Imagem gerada!','success');
+  };
+  img.onerror=function(){
+    status.innerHTML='<span style="color:var(--red)">✕ Erro ao gerar. Tente novamente ou simplifique o prompt.</span>';
+    document.getElementById('genImgPlaceholder').style.display='block';
+    btn.disabled=false;
+    btn.innerHTML='🎨 Gerar Imagem com IA';
+  };
+  img.src=url;
+}
+
+function generateImageVariation(){
+  var prompt=document.getElementById('genPrompt').value.trim();
+  if(!prompt){showToast('Preencha o prompt primeiro','error');return}
+  generateImage(); // new seed = new variation
+}
+
+function downloadGenImage(){
+  var img=document.getElementById('genImgResult');
+  if(!img.src)return;
+  var a=document.createElement('a');
+  a.href=img.src;
+  a.download='espaco-viv-post-'+Date.now()+'.jpg';
+  a.target='_blank';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  showToast('Download iniciado!','success');
+}
+
+function useGenImage(){
+  var img=document.getElementById('genImgResult');
+  if(!img.src)return;
+  // Store the image URL for when saving as draft
+  window._genImageUrl=img.src;
+  showToast('Imagem vinculada! Salve como rascunho para usar no post.','success');
+}
+
 function saveGenAsDraft(){
   var titulo=document.getElementById('genTema').value.trim()||'Post gerado '+new Date().toLocaleDateString('pt-BR');
   var post={
@@ -1155,7 +1236,7 @@ function saveGenAsDraft(){
     copyStories:document.getElementById('genStories').value,
     hashtags:document.getElementById('genHashtags').value,
     promptImagem:document.getElementById('genPrompt').value,
-    imagemUrl:null,notasInternas:'',responsavel:'Equipe SM'
+    imagemUrl:window._genImageUrl||null,notasInternas:'',responsavel:'Equipe SM'
   };
   if(!appData.social_posts)appData.social_posts=[];
   appData.social_posts.push(post);
