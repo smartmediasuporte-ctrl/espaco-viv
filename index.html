@@ -1171,16 +1171,19 @@ function generateImage(){
   else if(aspect==='1:1'){w=1024;h=1024}
   else if(aspect==='16:9'){w=1365;h=768}
   genImgSeed=Math.floor(Math.random()*999999);
-  var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt)+'?width='+w+'&height='+h+'&seed='+genImgSeed+'&model=flux&nologo=true';
+  // Simplify prompt - remove special chars that break URL
+  var cleanPrompt=prompt.replace(/[^\w\s,.-]/g,'').substring(0,500);
+  var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(cleanPrompt)+'?width='+w+'&height='+h+'&seed='+genImgSeed+'&nologo=true';
   document.getElementById('genImgPlaceholder').style.display='none';
   document.getElementById('genImgPreview').style.display='none';
   var status=document.getElementById('genImgStatus');
   status.style.display='block';
-  status.innerHTML='<span style="color:var(--accent)">⏳ Gerando imagem... pode levar 10-30 segundos</span>';
+  status.innerHTML='<span style="color:var(--accent)">⏳ Gerando imagem... pode levar 15-40 segundos</span>';
   var btn=document.getElementById('genImgBtn');
   btn.disabled=true;
   btn.innerHTML='⏳ Gerando...';
   var img=document.getElementById('genImgResult');
+  img.crossOrigin='anonymous';
   img.onload=function(){
     document.getElementById('genImgPreview').style.display='block';
     status.innerHTML='<span style="color:var(--green-light)">✓ Imagem gerada com sucesso!</span>';
@@ -1189,10 +1192,21 @@ function generateImage(){
     showToast('Imagem gerada!','success');
   };
   img.onerror=function(){
-    status.innerHTML='<span style="color:var(--red)">✕ Erro ao gerar. Tente novamente ou simplifique o prompt.</span>';
-    document.getElementById('genImgPlaceholder').style.display='block';
-    btn.disabled=false;
-    btn.innerHTML='🎨 Gerar Imagem com IA';
+    // Retry once without crossOrigin
+    img.crossOrigin=null;
+    img.onload=function(){
+      document.getElementById('genImgPreview').style.display='block';
+      status.innerHTML='<span style="color:var(--green-light)">✓ Imagem gerada!</span>';
+      btn.disabled=false;
+      btn.innerHTML='🎨 Gerar Imagem com IA';
+    };
+    img.onerror=function(){
+      status.innerHTML='<span style="color:var(--red)">✕ Erro ao gerar. Tente simplificar o prompt (menos palavras, sem caracteres especiais).</span>';
+      document.getElementById('genImgPlaceholder').style.display='block';
+      btn.disabled=false;
+      btn.innerHTML='🎨 Gerar Imagem com IA';
+    };
+    img.src=url+'&t='+Date.now();
   };
   img.src=url;
 }
