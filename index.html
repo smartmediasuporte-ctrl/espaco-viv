@@ -242,6 +242,23 @@ tr:hover td{background:rgba(255,255,255,0.01)}
 .post-card-body .pc-copy{font-size:11px;color:var(--text-muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .post-card-actions{padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:6px}
 .post-card-actions button{flex:1}
+/* Status Pipeline Bar */
+.status-pipeline{padding:12px 14px;border-top:1px solid var(--border)}
+.pipeline-bar{display:flex;align-items:center;gap:0;position:relative;margin-bottom:8px}
+.pipeline-step{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;cursor:pointer;transition:var(--transition)}
+.pipeline-step .pip-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;transition:all 0.3s ease;color:var(--text-dim)}
+.pipeline-step.completed .pip-dot{background:var(--accent);border-color:var(--accent);color:#fff}
+.pipeline-step.current .pip-dot{background:var(--accent-dark);border-color:var(--accent);color:#fff;box-shadow:0 0 12px rgba(167,139,250,0.4);transform:scale(1.15)}
+.pipeline-step .pip-label{font-size:8px;color:var(--text-dim);margin-top:4px;text-align:center;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;white-space:nowrap}
+.pipeline-step.completed .pip-label,.pipeline-step.current .pip-label{color:var(--accent)}
+.pipeline-line{position:absolute;top:14px;left:14%;right:14%;height:2px;background:var(--border);z-index:0}
+.pipeline-line-fill{height:100%;background:linear-gradient(90deg,var(--accent-dark),var(--accent));transition:width 0.5s ease;border-radius:1px}
+.pipeline-actions{display:flex;gap:6px;justify-content:center}
+.pip-btn{padding:5px 14px;border-radius:16px;font-size:10px;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:var(--transition);text-transform:uppercase;letter-spacing:0.3px}
+.pip-btn-next{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff}
+.pip-btn-next:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(167,139,250,0.3)}
+.pip-btn-back{background:transparent;border:1px solid var(--border);color:var(--text-muted)}
+.pip-btn-back:hover{border-color:var(--accent);color:var(--accent)}
 .badge-format{padding:3px 8px;border-radius:20px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
 .badge-reel{background:rgba(124,58,237,0.15);color:var(--purple)}
 .badge-feed{background:rgba(37,99,235,0.15);color:var(--sm-blue)}
@@ -879,6 +896,15 @@ function renderSmPosts(){
     var idx=posts.indexOf(p);
     var canEdit=currentUser==='Equipe SM';
     var canApprove=currentUser==='Raissa'&&p.status==='Aprovação Pendente';
+    var statusSteps=['Rascunho','Aprovação Pendente','Aprovado','Publicado'];
+    var currentStepIdx=statusSteps.indexOf(p.status);
+    if(currentStepIdx<0)currentStepIdx=0;
+    var fillPct=currentStepIdx===0?0:Math.round((currentStepIdx/(statusSteps.length-1))*100);
+    var nextStatus=currentStepIdx<statusSteps.length-1?statusSteps[currentStepIdx+1]:null;
+    var prevStatus=currentStepIdx>0?statusSteps[currentStepIdx-1]:null;
+    var nextLabel={'Rascunho':'Enviar p/ Aprovação','Aprovação Pendente':'Aprovar','Aprovado':'Publicar','Publicado':null};
+    var canAdvance=canEdit||(canApprove&&p.status==='Aprovação Pendente');
+
     return '<div class="post-card">'+
       '<div class="post-card-header">'+
         '<span class="badge-format '+fmtCls+'">'+getFormatLabel(p.formato)+'</span>'+
@@ -890,11 +916,27 @@ function renderSmPosts(){
         '<div class="pc-meta">'+esc(p.semana)+' · '+formatDate(p.dataPublicacao)+'</div>'+
         '<div class="pc-copy">'+esc(p.copyLegenda||'')+'</div>'+
       '</div>'+
+      '<div class="status-pipeline">'+
+        '<div class="pipeline-bar">'+
+          '<div class="pipeline-line"><div class="pipeline-line-fill" style="width:'+fillPct+'%"></div></div>'+
+          statusSteps.map(function(step,si){
+            var cls=si<currentStepIdx?'completed':si===currentStepIdx?'current':'';
+            var icons=['✎','⏳','✓','🚀'];
+            return '<div class="pipeline-step '+cls+'" onclick="setSmPostStatus('+idx+',\''+step+'\')">'+
+              '<div class="pip-dot">'+icons[si]+'</div>'+
+              '<div class="pip-label">'+step.replace('Aprovação Pendente','Pendente')+'</div>'+
+            '</div>';
+          }).join('')+
+        '</div>'+
+        '<div class="pipeline-actions">'+
+          (prevStatus&&(canEdit||canApprove)?'<button class="pip-btn pip-btn-back" onclick="setSmPostStatus('+idx+',\''+prevStatus+'\')">← Voltar</button>':'')+
+          (nextStatus&&canAdvance?'<button class="pip-btn pip-btn-next" onclick="setSmPostStatus('+idx+',\''+nextStatus+'\')">'+nextLabel[p.status]+' →</button>':'')+
+        '</div>'+
+      '</div>'+
       '<div class="post-card-actions">'+
         '<button class="btn btn-ghost btn-sm" onclick="viewSmPost('+idx+')">Ver</button>'+
         (canEdit?'<button class="btn btn-ghost btn-sm" onclick="openSmPostModal('+idx+')">Editar</button>'+
         '<button class="btn btn-ghost btn-sm" onclick="deleteSmPost('+idx+')" style="color:var(--red)">Excluir</button>':'')+
-        (canApprove?'<button class="btn btn-primary btn-sm" onclick="approveSmPost('+idx+')">Aprovar</button>':'')+
       '</div>'+
     '</div>';
   }).join('');
@@ -1024,15 +1066,21 @@ function deleteSmPost(idx){
 }
 
 function approveSmPost(idx){
+  setSmPostStatus(idx,'Aprovado');
+}
+
+function setSmPostStatus(idx,newStatus){
   var posts=getSmPosts();
-  if(posts[idx]){
-    posts[idx].status='Aprovado';
-    appData.social_posts=posts;
-    saveSection('social_posts');
-    renderSmPosts();
-    renderEcal();
-    showToast('Post aprovado!','success');
-  }
+  if(!posts[idx])return;
+  var oldStatus=posts[idx].status;
+  if(oldStatus===newStatus)return;
+  posts[idx].status=newStatus;
+  appData.social_posts=posts;
+  saveSection('social_posts');
+  renderSmPosts();
+  renderEcal();
+  var msgs={'Rascunho':'Post voltou para Rascunho','Aprovação Pendente':'Post enviado para aprovação!','Aprovado':'Post aprovado!','Publicado':'Post publicado!','Arquivado':'Post arquivado'};
+  showToast(msgs[newStatus]||'Status atualizado','success');
 }
 
 // ===== EDITORIAL CALENDAR =====
